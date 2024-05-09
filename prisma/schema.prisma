@@ -9,6 +9,6 @@ generator client {
 }
 // bo demer si documentation prisma bi di nga guiss instruction yi
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
