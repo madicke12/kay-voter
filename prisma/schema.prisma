@@ -17,6 +17,7 @@ datasource db {
 model electeur {
   id        String   @id @map("_id") @default(cuid())
   cni       String   @unique
+  numeroElecteur String @unique
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -48,6 +49,7 @@ model candidat {
   nom        String
   prenom     String
   cni        String
+  numeroElecteur String @unique
   // dateNaissance DateTime
   // lieuNaissance String
   // profession    String
@@ -66,9 +68,13 @@ model vote {
   candidatId String
   electionId String
   createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  //updatedAt  DateTime @updatedAt
 
   electeur electeur @relation(fields: [electeurId], references: [id])
   candidat candidat @relation(fields: [candidatId], references: [id])
   election election @relation(fields: [electionId], references: [id])
 }
+
+// model ficheElecteur {
+
+// }
