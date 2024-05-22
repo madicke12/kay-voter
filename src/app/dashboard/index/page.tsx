@@ -1,7 +1,9 @@
+import Election from "../../../../components/Election";
+
 const Index = () => {
   return (
     <div>
-      <h1>Dashboard</h1>
+      <Election />
     </div>
   );
 };
