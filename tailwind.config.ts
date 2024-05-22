@@ -20,6 +20,7 @@ const config = {
     },
     extend: {
       colors: {
+        kherer:"rgb(238,252,255)",
         main:"#00BDD6FF",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

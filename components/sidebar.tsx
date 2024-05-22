@@ -3,40 +3,38 @@ import Image from "next/image";
 import MenuItem from "./MenuItem";
 import UserInfo from "./UserInfo";
 
+
+
 const Sidebar: React.FC = () => {
   const menuItems = [
     {
-      link: "ajouterElection",
-      imgSrc:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/06bad53ea49609ec80b4454375d13521356db44396b8454504f5fe1efa7728d4?apiKey=9c066bb72ce5442ca7b521d698a43bb1&",
+      link: "index",
+      imgSrc:"Calendar",
       text: "Ajoutez election",
       alt: "Add Election",
     },
     {
       link: "Partis",
-      imgSrc:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/eae64112f3f3ba6b80fdd1a2e59bc2aea29163a658de5a98d8938fc461abed59?apiKey=9c066bb72ce5442ca7b521d698a43bb1&",
+      imgSrc:"Users",
       text: "Parties",
       alt: "Partis",
     },
     {
       link: "Statistics",
-      imgSrc:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/a55e61d1ac30d508f133881f398a777bdadbdcf4b09f93b156ce3d1cbd776e56?apiKey=9c066bb72ce5442ca7b521d698a43bb1&",
+      imgSrc: "BarChart",
       text: "Statistiques",
       alt: "Statistics",
     },
     {
       link: "AjouterCandidat",
-      imgSrc:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/e562219fef80e23a1a12a19da86119a3385295e21540bb05993d8dd16c6c58e1?apiKey=9c066bb72ce5442ca7b521d698a43bb1&",
+      imgSrc: "Plus",
       text: "Ajoutez Candidat",
       alt: "Add Candidate",
     },
   ];
 
   return (
-    <div className="flex flex-col h-fit justify-between px-4 py-6 bg-white shadow-sm max-w-[252px]">
+    <div className="flex flex-col h-full justify-between px-4 py-6 bg-white shadow-sm max-w-[252px]">
      <div>
      <header className="flex gap-2 text-lg font-bold leading-7 whitespace-nowrap text-zinc-900">
         <Image
