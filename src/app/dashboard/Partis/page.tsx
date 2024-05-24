@@ -1,8 +1,9 @@
+import AddPartiComponent from "../../../../components/yama";
 
 const Page = () => {
     return (
-        <div>
-            <h1>Parti</h1>
+        <div className="p-3 w-[700px]">
+           <AddPartiComponent/>
         </div>
     )
 }

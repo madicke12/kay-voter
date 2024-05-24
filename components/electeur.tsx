@@ -16,7 +16,6 @@ const ElecteurLogin = () => {
               <input type="checkbox" className="w-[150px]" />
               <input type="checkbox" className="w-[150px]" />
               <input type="checkbox" className="w-[150px]" />
-
             </div>
             <button
               type="submit"

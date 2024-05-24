@@ -1,8 +1,9 @@
+import StatsComponent from "../../../../components/diarra"
 
 const Page =()=>{
     return (
-        <div>
-            <h1>Statistics</h1>
+        <div className="p-3">
+            <StatsComponent/>
         </div>
     )
 }
