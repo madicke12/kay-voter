@@ -15,7 +15,7 @@ const StatCard: React.FC<StatCardProps> = ({ title, value, percentage, percentag
       <div className="text-base leading-7">{title}</div>
       <div className="mt-6 text-3xl font-semibold leading-10">{value}</div>
       <div className={`flex gap-1 mt-4 text-sm font-bold leading-5 ${percentageColor} whitespace-nowrap`}>
-        <Image loading="lazy" src={iconSrc} alt={alt} className="shrink-0 w-3 aspect-square" />
+        <Image width={50} height={50} loading="lazy" src={iconSrc} alt={alt} className="shrink-0 w-3 aspect-square" />
         <div>{percentage}</div>
       </div>
     </div>

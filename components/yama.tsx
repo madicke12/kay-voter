@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Party from "./parti";
+import AddPartiDialog from "./addPartiDialog";
 
 
 const AddPartiComponent: React.FC = () => {
@@ -14,10 +15,7 @@ const AddPartiComponent: React.FC = () => {
     <section className="flex flex-col max-w-[817px]">
       <header className="flex gap-5 w-full max-md:flex-wrap max-md:pr-5 max-md:max-w-full">
         <h1 className="flex-auto my-auto text-2xl font-bold leading-9 text-zinc-900">Parties Politiques</h1>
-        <button className="flex gap-1.5 justify-center px-3 py-2.5 text-sm leading-5 text-white bg-cyan-500 rounded" tabIndex={0}>
-          <Image width={50} height={50} loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/9b373777c3f57a1c691a3f154a94866d34b97af969c8bf7355344783e7c4ea90?apiKey=9c066bb72ce5442ca7b521d698a43bb1&" alt="" className="shrink-0 w-4 aspect-square" />
-          <span>Ajouter Partie</span>
-        </button>
+        <AddPartiDialog/>
       </header>
       <div className="flex gap-2 justify-center self-end px-3 py-2.5 mt-20 mr-32 text-sm leading-5 text-gray-600 whitespace-nowrap bg-gray-200 rounded-lg max-md:mt-10 max-md:mr-2.5">
         <span className="my-auto">Filtrer</span>
