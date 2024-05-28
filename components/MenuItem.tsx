@@ -30,7 +30,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ imgSrc, text, alt, href }) => {
   ) } href={href}>
     {imgSrc === 'Calendar' && <Calendar size={24} />}
     {imgSrc === 'BarChart' && <BarChart size={24} />}
-    {imgSrc === 'Plus' && <Plus size={24} />}
+   
     {imgSrc === 'Users' && <Users size={24} />}
     <div className="flex-auto my-auto">{text}</div>
   </Link>)

@@ -2,6 +2,7 @@ import * as React from "react";
 import Image from "next/image";
 import MenuItem from "./MenuItem";
 import UserInfo from "./UserInfo";
+import { AddCandidatDialog } from "./addCandidatDialog";
 
 
 
@@ -25,12 +26,7 @@ const Sidebar: React.FC = () => {
       text: "Statistiques",
       alt: "Statistics",
     },
-    {
-      link: "AjouterCandidat",
-      imgSrc: "Plus",
-      text: "Ajoutez Candidat",
-      alt: "Add Candidate",
-    },
+    
   ];
 
   return (
@@ -51,6 +47,7 @@ const Sidebar: React.FC = () => {
         {menuItems.map(({ imgSrc, text, alt ,link}) => (
           <MenuItem key={text} imgSrc={imgSrc} text={text} alt={alt} href={link} />
         ))}
+        <AddCandidatDialog />
       </nav>
      </div>
       <UserInfo

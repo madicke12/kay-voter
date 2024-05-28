@@ -59,7 +59,7 @@ const StatsComponent: React.FC = () => {
   ];
 
   return (
-    <div className="flex flex-col items-end px-16 pt-8 pb-20 bg-white shadow-sm max-md:px-5">
+    <div className="flex flex-col items-end px-16 pt-8 pb-20 bg-white  max-md:px-5">
       <div className="flex flex-col mr-20 max-w-full w-[769px] max-md:mr-2.5">
         <h1 className="text-3xl leading-10 text-zinc-900 max-md:max-w-full">Statistique</h1>
         <section className="mt-12 max-md:mt-10 max-md:max-w-full">
