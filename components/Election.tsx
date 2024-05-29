@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Calendrier } from "./calendrier";
 import { Button } from "@/components/ui/button";
 import Grip from "./grip";
+import { Dropdown } from "./drop";
 
 type EventProps = {
   time: string;
@@ -38,7 +39,7 @@ const Event: React.FC<EventProps> = ({
          
         </div>
         {/* <div class="absolute top-[213px] left-[103px] w-[624px] h-0 border border-primary-500 transform rotate-0"></div> */}
-        <Grip/>
+        <Dropdown/>
       </div>
     )}
   </>
