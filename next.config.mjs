@@ -2,7 +2,7 @@
 const nextConfig = {
     images: {
         dangerouslyAllowSVG: true,
-        domains: ['cdn.builder.io','builder.io'],
+        domains: ['cdn.builder.io','builder.io','app.visily.ai'],
     },
 };
 
