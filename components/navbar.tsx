@@ -1,22 +1,15 @@
+'use client'
 import * as React from 'react';
 import Image from 'next/image';
+import clsx from 'clsx';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
-interface NavItemProps {
-  text: string;
-  className: string;
-}
 
-const NavItem: React.FC<NavItemProps> = ({ text, className }) => (
-  <div
-    className={`${className}  justify-center flex items-center px-16 py-5 w-fit max-md:px-5`}
-    tabIndex={0}
-    role='button'
-  >
-    {text}
-  </div>
-);
+
 
 const Nav: React.FC = () => {
+  const pathName = usePathname()
   return (
     <header className='flex gap-5 justify-between h-[76px] p-3 font-bold bg-violet-400 shadow-sm max-md:flex-wrap'>
       <div className='flex gap-4 my-auto text-3xl leading-10 text-white whitespace-nowrap'>
@@ -31,9 +24,13 @@ const Nav: React.FC = () => {
         <div className='flex-auto my-auto'>Kayvote</div>
       </div>
       <nav className='flex gap-5 justify-between text-lg leading-7 max-md:flex-wrap max-md:max-w-full'>
-        <div className='flex gap-0 justify-center bg-black bg-opacity-0 max-md:flex-wrap max-md:max-w-full'>
-          <NavItem className='text-violet-500 bg-violet-50' text='Voter' />
-          <NavItem className='text-white bg-black bg-opacity-0' text='Consulter Resultat' />
+        <div className='flex text-white gap-2 justify-center bg-black bg-opacity-0 max-md:flex-wrap max-md:max-w-full'>
+          <Link href='/electeur/resultat' className={clsx('px-5 w-80 flex items-center justify-center',pathName=='/electeur/voter' ? 'text-violet-500 bg-violet-50':'')}>
+            Voter
+          </Link>
+          <Link href='/electeur/resultat' className={clsx('px-5 w-80 flex items-center justify-center',pathName=='/electeur/resultat' ? 'text-violet-500 bg-violet-50':'')}>
+            Resultat
+          </Link>
         </div>
       </nav>
 
