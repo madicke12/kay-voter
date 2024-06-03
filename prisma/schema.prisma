@@ -15,17 +15,19 @@ datasource db {
 }
 
 model electeur {
-  id        String   @id @map("_id") @default(cuid())
-  cni       String   @unique
-  numeroElecteur String @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  vote      vote[]
+  id             String          @id @default(cuid()) @map("_id")
+  cni            String          @unique
+  numeroElecteur String          @unique
+  password       String
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  vote           vote[]
+  role        String
+
 }
 
 model administrateur {
-  id        String   @id @map("_id") @default(cuid())
+  id        String   @id @default(cuid()) @map("_id")
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
@@ -33,11 +35,10 @@ model administrateur {
 }
 
 model election {
-  id          String     @id @map("_id") @default(cuid())
+  id          String     @id @default(cuid()) @map("_id")
   titre       String     @unique
   description String
   dateDebut   DateTime
-  dateFin     DateTime
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   candidats   candidat[]
@@ -45,11 +46,11 @@ model election {
 }
 
 model candidat {
-  id         String   @id @map("_id") @default(cuid())
+  id         String   @id @default(cuid()) @map("_id")
   nom        String
   prenom     String
   cni        String
-  numeroElecteur String @unique
+  // numeroElecteur String   @unique
   // dateNaissance DateTime
   // lieuNaissance String
   // profession    String
@@ -63,7 +64,7 @@ model candidat {
 }
 
 model vote {
-  id         String   @id   @map("_id")  @default(cuid())
+  id         String   @id @default(cuid()) @map("_id")
   electeurId String
   candidatId String
   electionId String
@@ -75,6 +76,7 @@ model vote {
   election election @relation(fields: [electionId], references: [id])
 }
 
-// model ficheElecteur {
-
-// }
+model ficheElecteur {
+  id         String   @id @default(cuid()) @map("_id")
+  electeurCni String
+}

@@ -41,15 +41,13 @@ const CandidateDialog = () => {
                     </figure>
                     <h2 className="mt-9 text-xl font-bold leading-8 text-zinc-700">DIomaye Faye</h2>
                     <p className="mt-5 text-sm leading-5 text-center text-zinc-900">Appuyer sur confirmer pour voter Diomaye</p>
+                    <input type="text" className="hidden" name="electionId"/>
+                    <input type="text" className="hidden" name="candidatId"/>
+                    <input type="text" className="hidden"  name="electeurId"/>
+                    
                     <div className="flex gap-5 self-stretch mt-9 text-sm leading-5 whitespace-nowrap max-md:flex-wrap max-md:max-w-full">
                         <Button
-                            
-                            className="grow justify-center items-center px-16 py-3.5 rounded bg-black bg-opacity-0 text-zinc-900 w-fit max-md:px-5"
-                        >
-                            Annuler
-                        </Button>
-                        <Button
-                            
+                            type="submit"
                             className="grow justify-center items-center px-16 py-3.5 text-white bg-violet-500 rounded w-fit max-md:px-5"
                         >
                             Confirmer

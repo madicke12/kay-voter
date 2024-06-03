@@ -6,18 +6,15 @@ export const createElection =async (formdata:FormData) => {
     const titre = formdata.get('titre') as string; ;
     const description = formdata.get('description') as string ;
     const dateDebut = formdata.get('dateDebut') as string;
-    const dateFin = formdata.get('dateFin')
-    const type = formdata.get('type');
 
     const Election = await prisma.election.create({
         data:{
             titre,
             description,
             dateDebut,
-            dateFin,
-            type
         }
     }) 
+   console.log(Election)
 }
 
 export const getElections = async () => {

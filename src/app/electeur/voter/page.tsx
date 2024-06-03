@@ -1,14 +1,16 @@
-'use client'
 import React from "react";
 import { CarouselSize } from "../../../../components/slide";
+import { getSession } from "../../../../server/auth";
+import { cookies } from "next/headers";
 
 
 
 
 
-const page: React.FC = () => {
+const page: React.FC = async() => {
 
-  
+const session = cookies().get("session")
+console.log(session)
 
     return (
         <main className="flex justify-center items-center px-16 py-20 bg-gray-50 max-md:px-5">

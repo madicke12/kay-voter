@@ -25,7 +25,7 @@ const Nav: React.FC = () => {
       </div>
       <nav className='flex gap-5 justify-between text-lg leading-7 max-md:flex-wrap max-md:max-w-full'>
         <div className='flex text-white gap-2 justify-center bg-black bg-opacity-0 max-md:flex-wrap max-md:max-w-full'>
-          <Link href='/electeur/resultat' className={clsx('px-5 w-80 flex items-center justify-center',pathName=='/electeur/voter' ? 'text-violet-500 bg-violet-50':'')}>
+          <Link href='/electeur/voter' className={clsx('px-5 w-80 flex items-center justify-center',pathName=='/electeur/voter' ? 'text-violet-500 bg-violet-50':'')}>
             Voter
           </Link>
           <Link href='/electeur/resultat' className={clsx('px-5 w-80 flex items-center justify-center',pathName=='/electeur/resultat' ? 'text-violet-500 bg-violet-50':'')}>
