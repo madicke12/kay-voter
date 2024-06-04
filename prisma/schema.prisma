@@ -18,11 +18,9 @@ model electeur {
   id             String          @id @default(cuid()) @map("_id")
   cni            String          @unique
   numeroElecteur String          @unique
-  password       String
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
   vote           vote[]
-  role        String
 
 }
 

@@ -23,13 +23,15 @@ export async function decrypt(input: string): Promise<any> {
 }
 
 export async function login(formData: FormData) {
-  console.log(formData)
+  'use server'
+  console.log(formData.get('cni'))
   const prisma = new PrismaClient()
 
   const electeurs = await prisma.electeur.findMany()
   const isElecteur = electeurs.find(electeur => electeur.cni === formData.get('cni'))
   if (!isElecteur) {
-    return { error: "Vous n'etes pas un electeur" }
+    console.log("Vous n'etes pas un electeur")
+    return 
   }
   // Create the session
   const user = await prisma.electeur.findUnique({

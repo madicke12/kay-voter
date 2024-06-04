@@ -1,12 +1,12 @@
 import InputField from "./inputField";
 import {login} from '../server/auth'
+import { UserForm } from "./userLogin";
 
 
 
 
 
 const Login = () => {
-
 
   return (
     <div className="flex items-center justify-center min-h-screen yamba">
@@ -15,9 +15,7 @@ const Login = () => {
           <h1 className="self-center text-2xl font-semibold leading-9 text-center text-zinc-900">
             Se Connecter
           </h1>
-            <InputField label="Cni" placeholder="Entrez votre CNI"  />
-            {/* <InputField label="Mot de Passe" placeholder="*************" name="password"/> */}
-          
+          <UserForm/>
         </div>
       </div>
     </div>

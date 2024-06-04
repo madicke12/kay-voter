@@ -1,7 +1,7 @@
 import React from "react";
 import { CarouselSize } from "../../../../components/slide";
 import { getSession } from "../../../../server/auth";
-import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 
 
@@ -9,8 +9,9 @@ import { cookies } from "next/headers";
 
 const page: React.FC = async() => {
 
-const session = cookies().get("session")
+const session = await getSession();
 console.log(session)
+if (!session) redirect("/login");
 
     return (
         <main className="flex justify-center items-center px-16 py-20 bg-gray-50 max-md:px-5">

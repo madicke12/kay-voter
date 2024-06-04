@@ -4,21 +4,21 @@ const prisma = new PrismaClient();
 
 async function seedData() {
   // Sample Electors
-//   const electors = await prisma.electeur.createMany({
-//     data: [
-//       {
-//         cni: "123456789A",
-//         numeroElecteur: "ELE000001",
+  const electors = await prisma.electeur.createMany({
+    data: [
+      {
+        cni: "123456789A",
+        numeroElecteur: "ELE000001",
        
-//       },
-//       {
-//         cni: "987654321B",
-//         numeroElecteur: "ELE000002",
+      },
+      {
+        cni: "987654321B",
+        numeroElecteur: "ELE000002",
      
-//       },
-//       // Add more electors here
-//     ],
-//   });
+      },
+      // Add more electors here
+    ],
+  });
 
 //   // Sample Administrators
 //   const admins = await prisma.administrateur.createMany({
@@ -40,19 +40,19 @@ async function seedData() {
 //       },
 //     ],
 //   });
- const ficheElecteur = await prisma.ficheElecteur.createMany({
-    data: [
-      {
-        cni: "123456789A",
-        numeroElecteur: "ELE000001",
+//  const ficheElecteur = await prisma.ficheElecteur.createMany({
+//     data: [
+//       {
+//         cni: "123456789A",
+//         numeroElecteur: "ELE000001",
         
-      },
-      {
-        cni: "987654321B",
-        numeroElecteur: "ELE000002",
-      },
-    ],
-  });
+//       },
+//       {
+//         cni: "987654321B",
+//         numeroElecteur: "ELE000002",
+//       },
+//     ],
+//   });
   // Sample Candidates (link to specific election)
 //   const candidates = await prisma.candidat.createMany({
 //     data: [

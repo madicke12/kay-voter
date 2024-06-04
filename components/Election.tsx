@@ -53,6 +53,8 @@ const Election: React.FC = () => {
         'use server'
         console.log(formadata.get('matricule'))
         console.log(formadata.get('date'))
+        console.log(formadata.get('tour'))
+
       }}>
         <section className="self-stretch max-md:max-w-full">
           <div className="flex gap-5 max-md:flex-col max-md:gap-0">
@@ -103,7 +105,7 @@ const Election: React.FC = () => {
                 </label>
                 <div className="flex flex-col  justify-center bg-white rounded border border-cyan-500 border-solid text-neutral-300">
                   <input
-                    name="Intitulé"
+                    name="tour"
                     id="Intitulé"
                     type="text"
                     placeholder="Entrer le l'intitulé de l'election"
