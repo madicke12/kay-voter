@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
-import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { PrismaClient } from '@prisma/client'
-import { redirect } from "next/navigation";
-import { encrypt , decrypt } from "../../../../server/auth";
+import { encrypt  } from "../../../../server/auth";
 const prisma = new PrismaClient()
 
 export async function POST(req :Request) {
@@ -15,14 +13,13 @@ export async function POST(req :Request) {
     console.log("Vous n'etes pas un electeur")
     return NextResponse.json({ state: true }, { status: 200 })
   }
-  // // Create the session
+  // Create the session
  
-  // const expires = new Date(Date.now() + 10 * 10000);
-  // const session = await encrypt({ isElecteur, expires });
-  // console.log(session)
+  const expires = new Date(Date.now() + 10 * 10000);
+  const session = await encrypt({ isElecteur, expires });
+  console.log(session)
 
-  // // Save the session in a cookie
-  // cookies().set("session", session, { expires, httpOnly: true });
-  // redirect("/electeur/voter")
-  // return NextResponse.json({ message: "Hello World" }, { status: 200 });
+  // Save the session in a cookie
+  cookies().set("session", session, { expires, httpOnly: true });
+  return NextResponse.json({ redirectUrl : 'electeur/voter' }, { status: 200 });
 }

@@ -15,13 +15,12 @@ datasource db {
 }
 
 model electeur {
-  id             String          @id @default(cuid()) @map("_id")
-  cni            String          @unique
-  numeroElecteur String          @unique
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
+  id             String   @id @default(cuid()) @map("_id")
+  cni            String   @unique
+  numeroElecteur String   @unique
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
   vote           vote[]
-
 }
 
 model administrateur {
@@ -33,14 +32,14 @@ model administrateur {
 }
 
 model election {
-  id          String     @id @default(cuid()) @map("_id")
-  titre       String     @unique
-  description String
-  dateDebut   DateTime
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  candidats   candidat[]
-  vote        vote[]
+  id        String     @id @default(cuid()) @map("_id")
+  titre     String
+  date      String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  candidats candidat[]
+  vote      vote[]
+  matricule String     @unique
 }
 
 model candidat {
@@ -59,6 +58,8 @@ model candidat {
 
   election election @relation(fields: [electionId], references: [id])
   vote     vote[]
+  parti    parti?   @relation(fields: [partiId], references: [id])
+  partiId  String?
 }
 
 model vote {
@@ -75,6 +76,15 @@ model vote {
 }
 
 model ficheElecteur {
-  id         String   @id @default(cuid()) @map("_id")
+  id          String @id @default(cuid()) @map("_id")
   electeurCni String
+}
+
+model parti {
+  id          String     @id @default(cuid()) @map("_id")
+  nom         String
+  matricule   String
+  description String
+  dateCreation String
+  candidat    candidat[]
 }

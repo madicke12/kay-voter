@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useState } from 'react'
+import { redirect } from 'next/navigation'
 
 
 export function UserForm() {
@@ -40,10 +41,7 @@ export function UserForm() {
   })
  async function onSubmit(values: z.infer<typeof formSchema>) {
    const response = await axios.post('http://localhost:3000/api/login',values)
-
-    console.log(response)
-
-
+   window.location.href = response.data.redirectUrl
   }
 
 

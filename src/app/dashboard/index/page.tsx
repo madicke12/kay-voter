@@ -1,3 +1,4 @@
+
 import Election from "../../../../components/Election";
 
 const Index = () => {
