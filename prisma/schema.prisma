@@ -40,6 +40,7 @@ model election {
   candidats candidat[]
   vote      vote[]
   matricule String     @unique
+  availabe Boolean
 }
 
 model candidat {
@@ -58,8 +59,8 @@ model candidat {
 
   election election @relation(fields: [electionId], references: [id])
   vote     vote[]
-  parti    parti?   @relation(fields: [partiId], references: [id])
-  partiId  String?
+  parti    parti   @relation(fields: [partiId], references: [id])
+  partiId  String
 }
 
 model vote {
@@ -83,7 +84,7 @@ model ficheElecteur {
 model parti {
   id          String     @id @default(cuid()) @map("_id")
   nom         String
-  matricule   String
+  matricule   String @unique
   description String
   dateCreation String
   candidat    candidat[]
