@@ -10,25 +10,28 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import InputBlock from "./n"
-import Image from "next/image"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-
 import {
     Form,
 
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
-    FormMessage,
+    FormMessage
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { type PutBlobResult } from '@vercel/blob'
+import Image from "next/image"
+import { useRef, useState } from 'react'
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+import { upload } from '@vercel/blob/client';
+import axios  from 'axios';
 
 export function AddCandidatDialog() {
+    const inputFileRef = useRef<HTMLInputElement>(null);
+    const [blob, setBlob] = useState<PutBlobResult | null>(null);
     const formSchema = z.object({
         nom: z.string().min(3, {
             message: "Le nom doit au moins contenir 3 caracteres.",
@@ -36,22 +39,30 @@ export function AddCandidatDialog() {
         prenom: z.string().min(3, {
             message: "Le nom doit au moins contenir 3 caracteres."
         }),
-        cni: z.string().min(9 ,{
-            message:"Le numero d'indentification national doit etre un entier."
+        cni: z.string().min(9, {
+            message: "Le numero d'indentification national doit etre un entier."
         }),
-        matriculeParti : z.string().min(3,{
-            message:"Le matricule doit au moins contenir 3 caracteres."
+        matriculeParti: z.string().min(3, {
+            message: "Le matricule doit au moins contenir 3 caracteres."
         }),
-        matriculeElection : z.string().min(3,{
-            message:"Le matricule doit au moins contenir 3 caracteres."
+        matriculeElection: z.string().min(3, {
+            message: "Le matricule doit au moins contenir 3 caracteres."
         }),
+        photo: z.unknown()
 
     })
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema)
     })
-    const onSubmit = () => {
-        console.log("form submitted successfully")
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        const file = inputFileRef.current.files[0] ;
+        const newBlob = await upload(file.name, file, {
+            access: 'public',
+            handleUploadUrl: '/api/image/upload',
+          });
+          setBlob(newBlob);
+ 
+        const response = axios.post('/api/candidat/creer', { ...values, photo: newBlob.url }) ;
     }
     return (
         <Dialog>
@@ -82,7 +93,7 @@ export function AddCandidatDialog() {
                                         <FormControl>
                                             <Input placeholder="Entrer le nom du candidat" {...field} className=" bg-white border border-solid  border-cyan-500  items-start px-3 py-3 mt-2 whitespace-nowrap   text-neutral-300 max-md:pr-5" />
                                         </FormControl>
-                                      
+
                                         <FormMessage />
                                     </FormItem>
                                 )}
@@ -96,7 +107,7 @@ export function AddCandidatDialog() {
                                         <FormControl>
                                             <Input placeholder="Entrer le prenom du candidat" {...field} className=" bg-white border border-solid  border-cyan-500  items-start px-3 py-3 mt-2 whitespace-nowrap   text-neutral-300 max-md:pr-5" />
                                         </FormControl>
-                                       
+
                                         <FormMessage />
                                     </FormItem>
                                 )}
@@ -110,7 +121,7 @@ export function AddCandidatDialog() {
                                         <FormControl>
                                             <Input placeholder="Entrer le CNI du candidat" {...field} className=" bg-white border border-solid  border-cyan-500  items-start px-3 py-3 mt-2 whitespace-nowrap   text-neutral-300 max-md:pr-5" />
                                         </FormControl>
-                                      
+
                                         <FormMessage />
                                     </FormItem>
                                 )}
@@ -148,6 +159,23 @@ export function AddCandidatDialog() {
                                     )}
                                 />
                             </div>
+                            <div>
+                                <FormField
+                                    control={form.control}
+                                    name="photo"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Photo du candidat</FormLabel>
+                                            <FormControl>
+                                                <Input id="picture" ref={inputFileRef}  type="file"  />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+
+
 
 
                             <DialogFooter>
