@@ -55,14 +55,15 @@ export function AddCandidatDialog() {
         resolver: zodResolver(formSchema)
     })
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        const file = inputFileRef.current.files[0] ;
+        const file = inputFileRef.current.files[0];
         const newBlob = await upload(file.name, file, {
             access: 'public',
             handleUploadUrl: '/api/image/upload',
           });
           setBlob(newBlob);
- 
-        const response = axios.post('/api/candidat/creer', { ...values, photo: newBlob.url }) ;
+        values.photo = newBlob.url ;
+        const response = await axios.post('/api/candidat/creer',values ) ;
+        console.log(response.data) ;
     }
     return (
         <Dialog>
