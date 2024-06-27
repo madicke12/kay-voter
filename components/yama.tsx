@@ -1,15 +1,11 @@
 import Image from "next/image";
 import Party from "./parti";
 import AddPartiDialog from "./addPartiDialog";
+import { getParties } from "../server/action";
 
 
-const AddPartiComponent: React.FC = () => {
-  const parties = [
-    { name: 'PDS', date: '13/04/2020', iconSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/f8ed98abb243c607b6195f9272542f89eb7b4f3b31279cb19408e6963b88d944?apiKey=9c066bb72ce5442ca7b521d698a43bb1&', logoSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/b4c333d3be07fa25d009b4ccfc73b9658c6db0624655f3d8b5a0e8a47ae0f3f2?apiKey=9c066bb72ce5442ca7b521d698a43bb1&', altText: 'Party Icon PDS' },
-    { name: 'Pastef', date: '25/09/2020', iconSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/f8ed98abb243c607b6195f9272542f89eb7b4f3b31279cb19408e6963b88d944?apiKey=9c066bb72ce5442ca7b521d698a43bb1&', logoSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/b4c333d3be07fa25d009b4ccfc73b9658c6db0624655f3d8b5a0e8a47ae0f3f2?apiKey=9c066bb72ce5442ca7b521d698a43bb1&', altText: 'Party Icon Pastef' },
-    { name: 'beno', date: '30/11/2021', iconSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/f8ed98abb243c607b6195f9272542f89eb7b4f3b31279cb19408e6963b88d944?apiKey=9c066bb72ce5442ca7b521d698a43bb1&', logoSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/505b956adaac5f5f7ade102ea10bea22abcb948842e90e66e7649769a886c20d?apiKey=9c066bb72ce5442ca7b521d698a43bb1&', altText: 'Party Icon beno' },
-    { name: 'Awaler', date: '21/03/2020', iconSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/f8ed98abb243c607b6195f9272542f89eb7b4f3b31279cb19408e6963b88d944?apiKey=9c066bb72ce5442ca7b521d698a43bb1&', logoSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/505b956adaac5f5f7ade102ea10bea22abcb948842e90e66e7649769a886c20d?apiKey=9c066bb72ce5442ca7b521d698a43bb1&', altText: 'Party Icon Awaler' },
-  ];
+const AddPartiComponent: React.FC = async () => {
+  const parties = await getParties() ;
 
   return (
     <section className="flex flex-col max-w-[817px]">
@@ -23,7 +19,7 @@ const AddPartiComponent: React.FC = () => {
       </div>
       <section className="flex flex-col justify-center mt-5 w-full text-sm leading-5 whitespace-nowrap rounded-lg border border-solid bg-black bg-opacity-0 border-zinc-200 max-md:max-w-full">
         {parties.map((party) => (
-          <Party key={party.name} {...party} />
+          <Party key={party.id} nom={party.nom} dateCreation={party.dateCreation}  />
         ))}
       </section>
     </section>
