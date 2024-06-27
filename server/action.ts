@@ -1,21 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 
 
-export const createElection =async (formdata:FormData) => {
-    const prisma = new PrismaClient();
-    const titre = formdata.get('titre') as string; ;
-    const description = formdata.get('description') as string ;
-    const dateDebut = formdata.get('dateDebut') as string;
-
-    const Election = await prisma.election.create({
-        data:{
-            titre,
-            description,
-            dateDebut,
-        }
-    }) 
-   console.log(Election)
-}
 
 export const getElections = async () => {
     const prisma = new PrismaClient();
@@ -32,6 +17,12 @@ export const getElectionbyId = async (id:string) => {
     });
     return election;
 }
+export const getAvalaibleElection = async ()=>{
+    const prisma = new PrismaClient();
+    return await prisma.election.findFirst({
+        where :{availabe:true}
+    })
+}
 
 export const getElectionCandidates = async (id:string) => {
     const prisma = new PrismaClient();
@@ -43,24 +34,7 @@ export const getElectionCandidates = async (id:string) => {
     return candidates;
 }
 
-export const createCandidate = async (formdata:FormData) => {
-    const prisma = new PrismaClient();
-    const nom = formdata.get('nom') as string;
-    const prenom = formdata.get('prenom') as string;
-    const electionId = formdata.get('electionId') as string;
-    const photo = formdata.get('photo') as string;
-    const candidat = await prisma.candidat.create({
-        data:{
-            nom,
-            prenom,
-            electionId,
-            photoUrl:photo,
-            cni:formdata.get('cni') as string,
 
-        }
-    });
-    return candidat;
-}
 
 
 export const createVote = async (formdata:FormData) => {
@@ -77,3 +51,8 @@ export const createVote = async (formdata:FormData) => {
     return vote;
 }
 
+export const getParties = async()=>{
+    const prisma = new PrismaClient();
+    const p = await prisma.parti.findMany();
+    return p ;
+}
