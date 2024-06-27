@@ -1,6 +1,8 @@
 'use client'
 import React from 'react'
-import { Button } from "@/components/ui/button"
+import { Button  } from "@/components/ui/button"
+import { Textarea } from "@/components/ui/textarea"
+
 import Image from 'next/image';
 import { Calendar as CalendarIcon } from "lucide-react"
 import { format } from "date-fns"
@@ -36,14 +38,6 @@ interface TextAreaFieldProps {
   id: string;
 }
 
-const TextAreaField: React.FC<TextAreaFieldProps> = ({ label, id }) => (
-  <div className="flex flex-col justify-center py-4  max-md:max-w-full">
-    <label htmlFor={id} className="font-bold text-gray-700 max-md:max-w-full">{label}</label>
-    <div className="flex flex-col pt-3 pb-px pl-3 text-neutral-700 max-md:max-w-full">
-      <textarea id={id} className="max-md:max-w-full justify-center items-start p-2 rounded border-solid bg-black bg-opacity-0 border-[5px] border-cyan-500 border-opacity-20" placeholder='Decrivez le parti ....' />
-    </div>
-  </div>
-);
 import {
   Popover,
   PopoverContent,
@@ -60,9 +54,7 @@ function AddPartiDialog() {
     description: z.string().min(1, {
       message: "Ce champs est requis"
     }),
-    dob: z.date({
-      required_error: "A date of birth is required.",
-    }),
+
 
 
   })
@@ -70,12 +62,14 @@ function AddPartiDialog() {
     resolver: zodResolver(formSchema)
   })
   const onSubmit = async(values: z.infer<typeof formSchema>)=>{
-    const response = await axios.post('http://localhost:3000/api/creerParti' ,values)
+    const date = new Date()
+    const dateCreation = format(date, 'dd/MM/yyyy');
+    const response = await axios.post('http://localhost:3000/api/creerParti' ,{...values , dateCreation})
     console.log(response)
-    console.log("dkakb")
+    // console.log("dkakb")
   }
   return (
-    <Dialog>
+    <Dialog >
       <DialogTrigger asChild>
 
         <Button className="flex gap-1.5 justify-center px-3 py-2.5 text-sm leading-5 text-white bg-cyan-500 rounded">
@@ -84,7 +78,7 @@ function AddPartiDialog() {
           Ajouter Parti
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="w-[800px]">
         <DialogHeader>
           <DialogTitle>Ajoutez Parti</DialogTitle>
           <DialogDescription>
@@ -120,63 +114,28 @@ function AddPartiDialog() {
                 </FormItem>
               )}
             />
+          
             <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Description</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Entrer la description du parti" {...field} className=" bg-white border border-solid  border-cyan-500  items-start px-3 py-3 mt-2 whitespace-nowrap   text-neutral-300 max-md:pr-5" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-        <FormField
           control={form.control}
-          name="dob"
+          name="description"
           render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel>Date of birth</FormLabel>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <FormControl>
-                    <Button
-                      variant={"outline"}
-                      className={cn(
-                        "w-[240px] pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground"
-                      )}
-                    >
-                      {field.value ? (
-                        format(field.value, "PPP")
-                      ) : (
-                        <span>Pick a date</span>
-                      )}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                    </Button>
-                  </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={field.value}
-                    onSelect={field.onChange}
-                    disabled={(date) =>
-                      date > new Date() || date < new Date("1900-01-01")
-                    }
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
+            <FormItem>
+              <FormLabel>Description</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Description du parti politique"
+                  className="resize-none  bg-white border border-solid  border-cyan-500  items-start px-3 py-3 mt-2 whitespace-nowrap   text-neutral-300 max-md:pr-5"
+                  {...field}
+                />
+              </FormControl>
               <FormDescription>
-                Your date of birth is used to calculate your age.
+                Descrivez en quelques mots le parti politique
               </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
+        
             {/* <TextAreaField label='description' id='description' /> */}
 
         <DialogFooter>
