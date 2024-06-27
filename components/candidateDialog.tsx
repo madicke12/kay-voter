@@ -7,16 +7,22 @@ import { Button } from "@/components/ui/button"
 import diomaye from "../public/diomaye.png"
 import Image from "next/image"
 
+type propri = {
+    electionId: string,
+    candidatId: string,
+    photoUrl : string,
+    nom : string,
+    prenom: string,
+}
 
 
-
-const CandidateDialog = () => {
+const CandidateDialog:React.FC<propri> = ({electionId ,candidatId , photoUrl ,nom , prenom}) => {
     return (
         <Dialog>
             <DialogTrigger asChild className="mt-3 " >
 
                
-                <Image width={700} height={700} loading="lazy" src={diomaye} alt="" className="shrink-0  aspect-square" />
+                <Image width={700} height={700} loading="lazy" src={photoUrl} alt="" className="shrink-0  aspect-square" />
 
             </DialogTrigger>
             <DialogContent className="sm:max-w-[525px]">
@@ -39,11 +45,11 @@ const CandidateDialog = () => {
                             height={500}
                         />
                     </figure>
-                    <h2 className="mt-9 text-xl font-bold leading-8 text-zinc-700">DIomaye Faye</h2>
-                    <p className="mt-5 text-sm leading-5 text-center text-zinc-900">Appuyer sur confirmer pour voter Diomaye</p>
-                    <input type="text" className="hidden" name="electionId"/>
-                    <input type="text" className="hidden" name="candidatId"/>
-                    <input type="text" className="hidden"  name="electeurId"/>
+                    <h2 className="mt-9 text-xl font-bold leading-8 text-zinc-700">{nom + " " + prenom}</h2>
+                    <p className="mt-5 text-sm leading-5 text-center text-zinc-900">Appuyer sur confirmer pour confirmer le vote</p>
+                    <input type="text" className="hidden" name="electionId" value={electionId}/>
+                    <input type="text" className="hidden" name="candidatId" value={candidatId}/>
+                    <input type="text" className="hidden"  name="electeurId"value={'dadada'}/>
                     
                     <div className="flex gap-5 self-stretch mt-9 text-sm leading-5 whitespace-nowrap max-md:flex-wrap max-md:max-w-full">
                         <Button
