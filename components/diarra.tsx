@@ -2,12 +2,17 @@ import Image from "next/image";
 import StatCard from "./stats";
 import CandidateRow from "./candidat";
 
+type propsType ={
+  totalInscris : number,
+  candidat : any,
+  vote : number
+}
 
-const StatsComponent: React.FC = () => {
+const StatsComponent: React.FC<propsType> = ({totalInscris,candidat,vote}) => {
   const stats = [
     {
       title: 'Total inscris',
-      value: 1000000,
+      value: totalInscris,
       percentage: '5.39%',
       percentageColor: 'text-green-700',
       iconSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/e965aa3d5705b488c07e996d7b229dd57040e6ada4f58ed691a66ab0b8ad64f2?apiKey=9c066bb72ce5442ca7b521d698a43bb1&',
@@ -16,7 +21,7 @@ const StatsComponent: React.FC = () => {
     },
     {
       title: 'Total votant',
-      value: 6452,
+      value: vote,
       percentage: '4.39%',
       percentageColor: 'text-green-700',
       iconSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/e965aa3d5705b488c07e996d7b229dd57040e6ada4f58ed691a66ab0b8ad64f2?apiKey=9c066bb72ce5442ca7b521d698a43bb1&',
@@ -25,8 +30,8 @@ const StatsComponent: React.FC = () => {
     },
     {
       title: 'Bulletin Null',
-      value: 42502,
-      percentage: '0.65%',
+      value: 0,
+      percentage: '----',
       percentageColor: 'text-red-500',
       iconSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/cfc0c7047139f6c8a5f3042eee804ab037153cf6320e4ebae8e8c41056c13c00?apiKey=9c066bb72ce5442ca7b521d698a43bb1&',
       bgColor: 'bg-blue-50',
@@ -78,7 +83,7 @@ const StatsComponent: React.FC = () => {
             </div>
             <div></div>
           </header>
-          {candidates.map((candidate, index) => 
+          {candidat.map((candidate, index) => 
             <CandidateRow key={index} {...candidate} />
           )}
         </section>

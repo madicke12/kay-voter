@@ -10,7 +10,7 @@ generator client {
 
 // bo demer si documentation prisma bi di nga guiss instruction yi
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -40,7 +40,7 @@ model election {
   candidats candidat[]
   vote      vote[]
   matricule String     @unique
-  availabe Boolean
+  open Boolean    @unique
 }
 
 model candidat {

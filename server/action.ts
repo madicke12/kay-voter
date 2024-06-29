@@ -1,4 +1,5 @@
 import { Prisma, PrismaClient } from '@prisma/client';
+import { id } from 'date-fns/locale';
 
 
 
@@ -19,9 +20,10 @@ export const getElectionbyId = async (id:string) => {
 }
 export const getAvalaibleElection = async ()=>{
     const prisma = new PrismaClient();
-    return await prisma.election.findFirst({
-        where :{availabe:true}
+    const data = await prisma.election.findUnique({
+        where :{open:true}
     })
+    return  data
 }
 
 export const getElectionCandidates = async (id:string) => {
@@ -55,4 +57,26 @@ export const getParties = async()=>{
     const prisma = new PrismaClient();
     const p = await prisma.parti.findMany();
     return p ;
+}
+
+export const getVotes = async (id:string)=>{
+    const prisma = new PrismaClient()
+    const vote = await prisma.vote.findMany({
+        where:{electionId : id}
+    })
+    return vote.length
+}
+
+export const getTotalInscris = async ()=>{
+    const prisma = new PrismaClient()
+    const inscris = await prisma.electeur.findMany()
+    return inscris.length 
+}
+
+export const countVote = async (id:string)=>{
+    const prisma = new PrismaClient()
+    const vote = await prisma.vote.findMany({
+        where:{candidatId:id}
+    })
+    return vote.length
 }

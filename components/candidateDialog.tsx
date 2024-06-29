@@ -3,9 +3,10 @@ import {
     DialogContent,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import diomaye from "../public/diomaye.png"
 import Image from "next/image"
+import { getSession } from "../server/auth"
+
+import ClientForm from "./clientform"
 
 type propri = {
     electionId: string,
@@ -16,7 +17,10 @@ type propri = {
 }
 
 
-const CandidateDialog:React.FC<propri> = ({electionId ,candidatId , photoUrl ,nom , prenom}) => {
+const CandidateDialog:React.FC<propri> = async ({electionId ,candidatId , photoUrl ,nom , prenom}) => {
+    
+    const session = await getSession() 
+    console.log(session)
     return (
         <Dialog>
             <DialogTrigger asChild className="mt-3 " >
@@ -30,7 +34,7 @@ const CandidateDialog:React.FC<propri> = ({electionId ,candidatId , photoUrl ,no
                     <figure className="flex overflow-hidden relative flex-col items-center px-16 pt-20 w-full max-md:px-5 max-md:max-w-full">
                         <Image
                             loading="lazy"
-                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/e4e7f2428aa140189115f22881aa6415df823bca1cbc4d7449167aef327243fa?apiKey=9c066bb72ce5442ca7b521d698a43bb1&"
+                            src={photoUrl}
                             alt=""
                             className="object-cover absolute inset-0 size-full"
                             width={496}
@@ -45,20 +49,9 @@ const CandidateDialog:React.FC<propri> = ({electionId ,candidatId , photoUrl ,no
                             height={500}
                         />
                     </figure>
-                    <h2 className="mt-9 text-xl font-bold leading-8 text-zinc-700">{nom + " " + prenom}</h2>
+                    <h2 className="mt-9 text-xl font-bold leading-8 text-zinc-700">{prenom + " " + nom}</h2>
                     <p className="mt-5 text-sm leading-5 text-center text-zinc-900">Appuyer sur confirmer pour confirmer le vote</p>
-                    <input type="text" className="hidden" name="electionId" value={electionId}/>
-                    <input type="text" className="hidden" name="candidatId" value={candidatId}/>
-                    <input type="text" className="hidden"  name="electeurId"value={'dadada'}/>
-                    
-                    <div className="flex gap-5 self-stretch mt-9 text-sm leading-5 whitespace-nowrap max-md:flex-wrap max-md:max-w-full">
-                        <Button
-                            type="submit"
-                            className="grow justify-center items-center px-16 py-3.5 text-white bg-violet-500 rounded w-fit max-md:px-5"
-                        >
-                            Confirmer
-                        </Button>
-                    </div>
+                    <ClientForm electionId={electionId} candidatId={candidatId} session={session.isElecteur.id}/>
                 </section>
 
 

@@ -106,12 +106,12 @@ const Election: React.FC = () => {
                       name="matricule"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>CNI</FormLabel>
+                          <FormLabel>Matricule</FormLabel>
                           <FormControl>
-                            <Input placeholder="CNI" {...field} className="bg-white border border-solid border-cyan-500 items-start px-3 py-3 mt-2 whitespace-nowrap text-neutral-300 max-md:pr-5" />
+                            <Input placeholder="Matricule" {...field} className="bg-white border border-solid border-cyan-500 items-start px-3 py-3 mt-2 whitespace-nowrap text-neutral-300 max-md:pr-5" />
                           </FormControl>
                           <FormDescription>
-                            C'est votre numero d'indentification nationale
+                            C'est La matricule de l'election
                           </FormDescription>
                           <FormMessage />
                         </FormItem>

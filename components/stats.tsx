@@ -1,7 +1,7 @@
 import Image from "next/image";
 type StatCardProps = {
   title: string;
-  value: string | number;
+  value:  number;
   percentage: string;
   percentageColor: string;
   iconSrc: string;

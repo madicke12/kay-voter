@@ -13,6 +13,7 @@ export async function POST(req :Request) {
             titre:tour,
             matricule,
             date,
+            open : true
         }
     }) 
     revalidatePath('/dashboard/index')
