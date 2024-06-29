@@ -17,11 +17,11 @@ import { FC } from 'react';
 
 
 const formSchema = z.object({
-    cni: z.string().min(9, {
-      message: "Le numero d'indentification national doit etre un entier.",
+    email: z.string().min(9, {
+      message: "email incorrecte.",
     }),
-    numeroElecteur: z.string().min(9, {
-      message: "Le numero electeur doit contenir exactement 9 caractères."
+    password: z.string().min(9, {
+      message: "mot de passe incorrecte."
     })
   })
  
@@ -32,17 +32,14 @@ const formSchema = z.object({
 export function  page (){
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-          cni: "",
-          numeroElecteur: "",
-        },
+    
       })
     return(
         <Form {...form}>
         <form method='post' onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
-            name="cni"
+            name="email"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>CNI</FormLabel>
@@ -58,7 +55,7 @@ export function  page (){
           />
           <FormField
             control={form.control}
-            name="numeroElecteur"
+            name="password"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>CNI</FormLabel>
